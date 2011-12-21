@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+    <head>
+        <title>JS1k, 1k demo submission [ID]</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <canvas id="c"></canvas>
+        <script>
+            var b = document.body;
+            var c = document.getElementsByTagName('canvas')[0];
+            var a = c.getContext('2d');
+            document.body.clientWidth; // fix bug in webkit: http://qfox.nl/weblog/218
+        </script>
+        
+       
+        <script>
+        //W = innerWidth-21;
+       //H = innerHeight-21;
+//       D = Math.min(W,H);
+            W=innerWidth-21;
+            H=innerHeight-21;
+            c.width=W;
+            c.height=H;
+         //   D=Math.min(W, H);
+            D=W<H?W:H;            
+            a.shadowBlur=43;
+            a.shadowColor='#000';        
+            a.translate(W/2,H/2);   
+            C="789abcdef";                        
+            function F(g,h,j,d,e,f,n)
+            {
+                if (n)
+                {
+                    u = 0.6;
+                    v = 3.0;
+                    s = 0.64;
+                    function tri2(g,h,j,d,e,f)
+                    {
+                        F((v*g-j-e)*s, (v*h-d-f)*s, s*(g+j*u-e*u), s*(h+d*u-f*u), s*(g+e*u-j*u), s*(h+f*u-d*u), n - 1);
+                    }                        
+                    tri2(g,h,j,d,e,f);
+                    tri2(j,d,e,f,g,h);
+                    tri2(e,f,g,h,j,d);
+                }
+                
+                for (i = 0; i < 2; ++i)
+                {
+                    ip1 = i + 1;
+                    U = C[n+1-i];
+                    V="#"+U+U+U;
+                    a.fillStyle = V;
+                    a.strokeStyle = V;
+                    
+                    a.beginPath();
+                    a.lineTo(g/ip1,h/ip1);
+                    a.lineTo(j/ip1,d/ip1);
+                    a.lineTo(e/ip1,f/ip1);    
+                    a.closePath();
+                    a.stroke();
+                    a.fill();     
+                    
+                }
+            }
+            F(-60, -60, +60, -60, 0, 1, 6);
+            
+        </script>
+    </body>
+</html>

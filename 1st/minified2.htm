@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+	<head>
+		<title>JS1k, 1k demo submission [398]</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<canvas id="c"></canvas>
+		<script>
+D=document;z=30;Q=255;J=D.body.children[0];W=800;H=600;M=Math;S=M.sin;T=M.cos;c=[];C=[];Z=128;X="#000";for(i=0;i<5;++i){j=i?i+2:0;a=c[i]=i?D.createElement('canvas'):J;a.width=a.w=W>>j;a.height=a.h=H>>j;b=C[i]=a.getContext('2d');O="drawImage"}A=C[0];N="shadowBlur";L="fillStyle";F=0;Y="globalAlpha";B="globalCompositeOperation";y=A[B];function V(a,b){f=c[a];C[b][O](f,0,0,f.w,f.h,0,0,c[b].w,c[b].h)}function U(a,b){f=c[a];g=C[b];d=c[b].w/2;e=c[b].h/2;function h(a,b){g[O](f,0,0,f.w,f.h,a,b,d,e)}h(0,0);h(0,e);h(d,0);h(d,e)}function K(r,g,b){A[L]="rgb("+r+","+g+","+b+")"}function E(){F++;A[B]=y;A[Y]=.65;A[L]=X;A.fillRect(0,0,W,H);A[Y]=1;A[N]=6;A.shadowColor=X;for(i=9;i--;){t=F/9-i/2;R=t/2;K(Q,Z-i*9,64);I(Q*T(R),z+Z*S(t/4),10-i);K(Q-i*z,Q-i*9,0);I(z*T(R),Z*S(R),15-i);t=F/40-i*.7;K(i*15,0,192*(i%2)+i);I(z*i*T(t),z*i*S(t),z)}A[N]=0;for(i=1;i<5;++i){V(i-1,i)}A[B]='lighter';A[Y]=.3;U(1,0);V(3,0);A[Y]=.4;U(2,0);V(4,0)}function I(a,b,d){G(a,b,d);G(-a,b,d);G(-a,-b,d);G(a,-b,d);G(b,-a,d);G(-b,-a,d);G(-b,a,d);G(b,a,d)}function G(a,b,d){A.beginPath();A.arc(W/2+a,H/2+b,d,0,6.3,1);A.closePath();A.fill()}setInterval(E,z);
+		</script>
+	</body>
+</html>

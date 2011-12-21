@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+	<head>
+		<title>JS1k, 1k demo submission [398]</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<canvas id="c"></canvas>
+		<script>
+			canvas = document.body.children[0];
+			context = canvas.getContext("2d");
+			
+			var WIDTH = 800;
+			var HEIGHT = 600;
+			
+			canvas.width = WIDTH;
+			canvas.height = HEIGHT;
+			
+			frame = 0;
+			
+			//c.fillRect(f,B,f,f);
+				
+			
+
+				
+		//	context.fillStyle = "#000";
+		//	context.fillRect(0, 0, WIDTH, HEIGHT);				
+			
+			function draw()
+			{
+			
+				frame++;
+				
+				
+				
+				var f = 0.5 * (1 + Math.cos(frame * 0.1));			
+				var r = Math.round(255 * f);
+				var g = Math.round(120 * f);
+				var b = Math.round(16 * f);
+				
+				if ((frame>>2) % 4 == 0)
+				{
+					context.globalCompositeOperation = 'xor';
+					
+				}else
+				{
+					context.globalCompositeOperation = 'copy';
+				}
+				context.globalAlpha = 1.0;
+				context.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+				//context.fillRect(300, 200, 200, 200);
+				
+				context.beginPath();
+				time = frame * 0.05;
+				context.arc(400, 300, 100, 0 + time, 4 + time, true);
+				context.closePath();
+				context.fill();
+				
+				context.globalCompositeOperation = 'copy';				
+				
+				context.font = 'bold 30px sans-serif';
+				context.fillStyle = "#fff";
+				x=300;
+				y=595;
+				context.fillText("Games From Mars", x+5, y+5);
+				context.fillText("Games From Mars", x-5, y+5);
+				context.fillText("Games From Mars", x-5, y-5);
+				context.fillText("Games From Mars", x+5, y-5);
+				context.fillStyle = "#000";
+				context.fillText("Games From Mars", x, y);
+				
+				context.globalAlpha = 0.2 + 0.1 * Math.cos(frame * 0.01);
+				
+				context.drawImage(canvas, 8, 6, WIDTH - 16, HEIGHT - 12, 0, 0, WIDTH, HEIGHT);
+				
+				context.globalCompositeOperation = 'lighter';
+				context.globalAlpha = 1.0;				
+				
+				
+			}
+			
+			setInterval(draw, 30); 
+		
+		
+		</script>
+
+	</body>
+</html>

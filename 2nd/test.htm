@@ -1,0 +1,88 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<title>js1k</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<canvas></canvas>
+		<script>
+			var c = document.getElementsByTagName('canvas')[0];
+			var b = document.body;
+			var a = c.getContext('2d');
+		</script>
+
+		// a, b, c
+		// 
+		<script>		
+			for(p in a)a[p[0]+(p[6]||'')]=a[p];			
+			var M=Math,C=M.cos,S=M.sin,R=M.random,T=0,x=[],y=[];
+			W=innerWidth;
+			H=innerHeight;
+			c.width = W;
+			b.style.overflow = 'hidden'; 
+			b.style.margin = '0px';
+			c.height = H;
+			L=2047;
+			Z=100;
+			V=20;
+			N=511;
+			M=1337;
+			g='globalAlpha';h='fillStyle';
+			for(i=0;i < N; ++i)			
+			{
+				x[i] = L * R();
+				y[i] = L * R();
+			}
+			
+			setInterval(function(){
+				T+=1/V;
+				a[g]=0.2;
+				a[h]='#002';
+				a.fc(0,0,W,H);
+				a[g]=1;
+				
+				// moon
+				u=1;
+				
+				a[h]="#ffc";
+				for(i=0;i<N/3;++i)
+				{	
+					d=u=(u*M+1)&L;
+					u=(u*M+1)&L;
+					if(C(T*Z+i)<0.5) a.fx("\u2605",d,u);
+				}				
+				//a.shadowColor="#443";
+				//a.shadowBlur="10";			
+				a.beginPath();
+				a.arc(2*W/3, H/3, 40, 0, Math.PI*2, true);
+				a.closePath();
+				a.fill();				
+				//a.shadowBlur="0";	
+				//neige
+				
+				a[h]='#cfc';
+				B=H-V;
+				for (j = 0; j < 5; ++j)
+				{
+					s=90-j*V;
+					a.font=s+"px serif";
+					F=1;
+					for (i = 0; i< W; i+=(F=(F*M)%Z))
+					{	
+						a.fx("\u25B2", i-s/2, B+S(i)*30);
+					}
+					B-=s/2;
+				}
+			//	a.font="10px serif";
+				a[h]='#eef';
+				for(i=0;i < N;++i){	a.fx("\u06DE",x[i],y[i]);y[i]=(y[i]+1)%L;x[i]=(x[i]+C(i+T)/3)%L;}				
+				for(i=0;i < N*3;++i) a.fc((x[i&N]+i)&L,(y[i&N]+i)&L,1,1);
+				for(i=0;i<W;++i){d =Z+V*S(i/Z)+S(i/10);a.fc(i,H-d,1,d);}
+				
+				
+			},50);
+			
+		</script>
+	</body>
+</html>
