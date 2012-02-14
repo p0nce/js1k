@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+    <head>
+        <title>JS1k, 1k demo submission [ID]</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <canvas id="c"></canvas>
+        <script>
+            var b = document.body;
+            var c = document.getElementsByTagName('canvas')[0];
+            var a = c.getContext('2d');
+            document.body.clientWidth; // fix bug in webkit: http://qfox.nl/weblog/218
+        </script>
+        <script>
+            //b.style.margin = 0;
+            //b.style.overflow = "hidden";
+            var w = 512;
+            var h = 512;
+            c.width = w;
+            c.height = h;
+            var imageData = a.createImageData(w, h);
+            var data = imageData.data;
+            var dt = 0;
+            
+            function redraw()
+            {
+                dt += 1 / 100;
+                var mult = 1e162 * Math.exp(dt);
+                var inv_mult = 1e-162 * Math.exp(-dt);
+                //var mult = 1e100 * Math.exp(dt);
+                //var inv_mult = 1e-162 / Math.exp(dt);
+                var inv_mult2 = inv_mult * inv_mult;
+                var mult2 = mult*mult;
+
+                //var mult = 1e82 * dt;
+                //var inv_mult = 1e-82 / dt;
+                var index = 0;
+
+                for (var j = 0; j < h; ++j)
+                for (var i = 0; i < w; ++i)
+                {                    
+                    var dx = (i-w/2) * inv_mult;
+                    var dy = (j-h/2) * inv_mult;
+                    
+                    var eh = (dx*dx + dy*dy);
+                    var ez = (dx >= 0 ? dx:-dx)*dy;
+                    var dist = (eh+ez)*mult;
+                    
+                    dist *= mult;
+                    
+                   // var d = (128+sin(dist)*128)&255;
+                    var d = (dist * 42)&255;
+                    
+                    data[index] = d;
+                    data[index+1] = (d*0.6)|0;
+                    data[index+2] = (d*0.8)|0;
+                    data[index+3] = d >> 1;//d >> 3;// >> 1; 
+                    index += 4;
+                }
+                a.putImageData(imageData,0,0);                
+            }
+            setInterval(redraw, 50);
+        </script>
+    </body>
+</html>
